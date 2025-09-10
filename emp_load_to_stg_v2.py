@@ -54,7 +54,6 @@ def copy_to_table_semi_struct_data(session,config_file,schema='NA'):
 
 copied_into_result, qid = copy_to_table_semi_struct_data(session,config_snow_copy,src_stg_schema.int_emp_details_avro)
 
-
 print(copied_into_result)
 print(qid)
 

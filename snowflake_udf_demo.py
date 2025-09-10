@@ -3,8 +3,24 @@
 # Create or replace stage demo_db.public.udf_stage;
 
 from snowflake.snowpark.types import IntegerType, StringType
+from generic_code import code_library
 from snowflake.snowpark.functions import udf, col
 import pandas as pd
+
+connection_parameters = {"account":"ijvunnh-ny22848", \
+"user":"pradeep", \
+"password": "AbcdAbcdAbcd067$", \
+"role":"ACCOUNTADMIN", \
+"warehouse":"COMPUTE_WH", \
+"database":"DEMO_DB", \
+"schema":"PUBLIC" \
+}
+
+# Create connection with snowflake and return the session
+session_new = code_library.snowconnection(connection_parameters)
+
+# Run this in Snowfalke
+# create or replace stage demo_db.public.udf_stage;
 
 @udf(session = session_new,name='a_plus_b', input_types=[IntegerType(), IntegerType()], return_type=IntegerType(), stage_location='@udf_stage',is_permanent=True, replace=True)
 def a_plus_b(a: int, b: int) -> int:
@@ -13,6 +29,12 @@ def a_plus_b(a: int, b: int) -> int:
 df = session_new.create_dataframe(pd.DataFrame([(1, 2, 3, 4)], columns=["a", "b", "c", "d"]))
 df.show()
 df.withColumn('A_PLUS_B', a_plus_b(col('"a"'), col('"b"'))).show()
+
+# Create table customer test in snowflake before executing below code.
+# create table
+# DEMO_DB.PUBLIC.CUSTOMER_TEST
+# as
+# select * from SNOWFLAKE_SAMPLE_DATA.TPCH_SF10.CUSTOMER
 
 df = session_new.table("DEMO_DB.PUBLIC.CUSTOMER_TEST")
 dk = df.withColumn('A_PLUS_B', a_plus_b(col('C_CUSTOMER_SK'))).show()
@@ -46,10 +68,10 @@ from snowflake.snowpark.functions import udf
 session_new.add_packages("numpy", "pandas","catalogue","faker","phonenumbers","dateparser","nltk","textblob")
 
 #session.add_import("@DEMO_DB.PUBLIC.UDF_STAGE/scrubadub/scrubadub.zip")
-session_new.add_import('/Users/pradeep/Downloads/scrub/scrubadubw/scrubadub')
-session_new.add_import('/Users/pradeep/Downloads/python-stdnum-1.18/stdnum')
-session_new.add_import('/Users/pradeep/Downloads/textblob-0.17.1/textblob')
-session_new.add_import('/Users/pradeep/Downloads/xlrd-2.0.1/xlrd')
+session_new.add_import('/workspaces/Snowpark_pipeline/python_packages/scrub/scrubadubw/scrubadub')
+session_new.add_import('/workspaces/Snowpark_pipeline/python_packages/python-stdnum-1.18/stdnum')
+session_new.add_import('/workspaces/Snowpark_pipeline/python_packages/textblob-0.17.1/textblob')
+session_new.add_import('/workspaces/Snowpark_pipeline/python_packages/xlrd-2.0.1/xlrd')
 
 @udf(session=session_new ,name="external_scrub_text", is_permanent=True, stage_location="@UDF_STAGE", replace=True)
 def scrub_text(x: str) -> str:
