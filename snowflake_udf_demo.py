@@ -54,6 +54,7 @@ def email_validate(email: str) -> str:
     
 
 ##### Vectorised UDF #####
+### If you get certificate error. Just close the terminal or restart the kernel and run again.
 from snowflake.snowpark.functions import udf
 from snowflake.snowpark.types import IntegerType, PandasSeriesType, PandasDataFrameType
 

@@ -15,3 +15,13 @@ pip install snowflake-snowpark-python==1.5.0
 pip install snowflake -U
 
 pip install snowflake-cli-labs
+
+
+##################################### TROUBLESHOOTING #####################################
+# sometime you may face certificate error. Just close the terminal or restart the kernel and run again.
+# If you face certificate error, try below command
+conda create --name py312_env --override-channels -c https://repo.anaconda.com/pkgs/snowflake python=3.12 numpy pandas pyarrow
+
+conda init
+
+conda install snowflake-snowpark-python
