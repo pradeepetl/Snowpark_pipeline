@@ -1,0 +1,13 @@
+# Download the latest SnowSQL installer for Linux (x86_64)
+curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.4/linux_x86_64/snowsql-1.4.24-linux_x86_64.bash
+
+# Run the installer (this installs into ~/.snowsql by default)
+bash snowsql-1.4.24-linux_x86_64.bash
+
+
+echo 'export PATH="$HOME/.snowsql/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+
+snowsql --version
+
+

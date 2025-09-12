@@ -1,7 +1,7 @@
 
 CREATE OR REPLACE STAGE DEMO_STAGE;
-PUT file:///Users/pradeep/Downloads/raw_nyc_phil.json @DEMO_STAGE AUTO_COMPRESS=FALSE;
-PUT file:///Users/pradeep/Downloads/sample_file.xlsx @DEMO_STAGE AUTO_COMPRESS=FALSE;
+PUT file:///workspaces/Snowpark_pipeline/concepts/raw_nyc_phil.json @DEMO_STAGE AUTO_COMPRESS=FALSE;
+PUT file:///workspaces/Snowpark_pipeline/concepts/sample_file.xlsx @DEMO_STAGE AUTO_COMPRESS=FALSE;
 
 
 

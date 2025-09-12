@@ -1,10 +1,10 @@
 import json 
 import pandas as pd 
-from pandas.io.json import json_normalize #package for flattening json in pandas df
+#from pandas.io.json import json_normalize #package for flattening json in pandas df
 from pandas import json_normalize
 
 #load json object
-with open('raw_nyc_phil.json') as f:
+with open('./concepts/raw_nyc_phil.json') as f:
     d = json.load(f)
 
 #lets put the data into a pandas df
